@@ -28,8 +28,8 @@ for prof in range(1,20) :
     for i in range(len(diabeteXtest)) :
         tab = classifier.predict(diabeteXtest[i])
         for x in tab :
-            # print tab[0],diabeteYtest[i]
-            if tab[0] != diabeteYtest[i] :
+            # print tab[i],diabeteYtest[i]
+            if tab[i] != diabeteYtest[i] :
                 nbError = nbError + 1
 
     tauxErr = float(nbError)/float(len(diabeteYtest))
