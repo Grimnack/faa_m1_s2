@@ -163,33 +163,62 @@ def descenteGradientSigmoide(matrix,y,teta,t,epsilon,N):
         else :
             tetaActuel = tetaPlusPlus
             tempsActuel += 1
+
+def crossValidationSet(X,Y) :
+    taille = len(Y)
+    Xlearn = X[:(taille//10)*9]
+    Ylearn = Y[:(taille//10)*9]
+    Xtest = X[(taille//10)*9+1:]
+    Ytest = Y[(taille//10)*9:]
+    return (Xlearn,Ylearn,Xtest,Ytest)
+
+def donneErreur(Ytest,yCompare) :
+    print "tailles ", len(Ytest), len(yCompare)
+    for i in range(len(yCompare)) :
+        print Ytest[i] , yCompare[i]
+
+
 ################# SCRIPT #################
 
-# (teta0,teta1) = moindresCarres(matrix0,y0)
-# plt.plot(x0,y0,'ro')
-# plt.plot(x0,teta1*x0+teta0,'bo')
-# plt.show()
+############## Matrix 0 ##############
+# plt.plot(x0,y0,'r.',label="donnee")
+# matrix = matrixDegresN(2,x0)
+# teta = moindresCarres(matrix,y0)
+# y = donneY(teta,matrix)
+# plt.plot(x0,y,'b',label="approximation")
 
-# plt.plot(x1,y1,'ro')
+############## Matrix 1 ##############
+# plt.plot(x1,y1,'r.',label="donnee")
 # matrix = matrixDegresN(2,x1)
 # teta = moindresCarres(matrix,y1)
 # y = donneY(teta,matrix)
-# plt.plot(x1,y,'bo')
-# plt.plot(x2,y2,'ro')
+# plt.plot(x1,y,'b',label="approximation")
 
-classe0 = np.zeros(nbFilles)
-classe1 = np.ones(nbHommes)
-
-probUnSachantX = float(nbHommes/(nbHommes+nbFilles))
-
-matrix = np.zeros((2,(nbHommes+nbFilles)))
-matrix[1,:] = np.concatenate(taille_f,taille_h)
-lesClasses = np.concatenate(classe0,classe1)
+############## Matrix 2 ##############
+# plt.plot(x2,y2,'r.',label="donnee")
+# matrix = matrixDegresN(20,x2)
+# teta = moindresCarres(matrix,y2)
+# y = donneY(teta,matrix)
+# plt.plot(x2,y,'b.',label="approximation")
 
 
-plt.ylim(-1,2)
-plt.plot(taille_h,classe1,'bo')
-plt.plot(taille_f,classe0,'ro')
-# plt.plot(taille_h,'ro')
 
-plt.show()
+# plt.legend()
+# plt.show()
+
+############## Cross Validation ##############
+
+############## Matrix 0 ##############
+(Xlearn,Ylearn,Xtest,Ytest) = crossValidationSet(x0,y0)
+learn = matrixDegresN(2,Xlearn)
+test = matrixDegresN(2,Xtest)
+teta = moindresCarres(learn,Ylearn)
+yCompare = donneY(teta,test)
+donneErreur(Ytest,yCompare)
+
+############## Matrix 1 ##############
+
+############## Matrix 2 ##############
+
+
+

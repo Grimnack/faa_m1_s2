@@ -1,6 +1,7 @@
 \documentclass[a4paper,10pt]{report}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
+\usepackage{here}
 
 % Title Page
 \title{FAA partie 1}
@@ -20,7 +21,7 @@ $$J_{l\infty} = 2.51624302238$$
 
 
 
-\begin{figure}[!h]
+\begin{figure}[H]
  \centering
  \caption{Comparaison entre $2*x + 3$ et les points générés}
  \includegraphics[width=10cm]{tp1.png}
@@ -31,7 +32,7 @@ Les valeurs qui ont permis de générer les points sont 2 et 3 mais il existe un
 les points obtenus. Comme la fonction est une fonction linéaire on peut l'approximer avec les moindres carrés.
 Notre fonction $2*x+3$ devient maintenant : $$1.95293789 * x + 3.59623499 $$
 
-\begin{figure}[!h]
+\begin{figure}[H]
  \centering
  \caption{Nouvelle approximation}
  \includegraphics[width=10cm]{tp2.png}
@@ -55,25 +56,47 @@ J'ai implémenté la descente de gradient globale qui évalue donc tout le jeu d
 j'ai aussi implémenté la descente de gradient stochastique qui évalue une donné au hasard et apprend tout de suite après.
 Comme on peut l'observer sur les figures, la descente stochastique est bruité. 
 J'ai aussi fait varier le pas d'apprentissage alpha de la forme $\alpha = \frac{1}{i*100+t}$ en fonction de i et voici le résultat.
-\begin{figure}[!h]
+\begin{figure}[H]
  \centering
  \caption{Descente de gradient globale}
  \includegraphics[width=10cm]{globale.png}
 \end{figure}
 
-\begin{figure}[!h]
+\begin{figure}[H]
  \centering
  \caption{Descente de gradient stochastique}
  \includegraphics[width=10cm]{stochastique.png}
 \end{figure}
 
-\begin{figure}[!h]
+\begin{figure}[H]
  \centering
  \caption{Differents départs pour alpha}
  \includegraphics[width=10cm]{tp3.png}
 \end{figure}
 
 \section{TP4 : Généralisation et sur apprentissage}
+Avec la méthode des moindres carré il est possible d'approximer des ensembles de points comme on peut l'observer si dessous,
+cependant en machine learning il existe le phénomène de sur apprentissage c est a dire qu'on perd toute notion de prédiction,
+qu'une fois sorti du set d'apprentissage on ne déduit pas la bonne valeur. Pour vérifier que l'on a pas sur-appris
+on fait de la cross-validation, en général on garde 10 pour cent des données pour vérifier si on arrive a prédire les bonnes 
+valeurs après apprentissage.
 
+\begin{figure}[H]
+ \centering
+ \caption{matrix0}
+ \includegraphics[width=10cm]{matrix0.png}
+\end{figure}
+
+\begin{figure}[H]
+ \centering
+ \caption{matrix1}
+ \includegraphics[width=10cm]{matrix1.png}
+\end{figure}
+
+\begin{figure}[!h]
+ \centering
+ \caption{matrix2}
+ \includegraphics[width=10cm]{matrix2.png}
+\end{figure}
 
 \end{document}          

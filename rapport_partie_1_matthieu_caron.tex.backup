@@ -51,12 +51,22 @@ $$diff(J_{l2}) =  0.0346087308024$$
 $$diff(J_{l\infty}) = 0.0424232506015$$
 
 \section{TP 3 : Descente de gradient }
-Alors tout d'abord pour une raison que je n'arrive pas à expliquer, ma descente de gradient stochastique ne marche pas
-si j'utilise une boucle WHILE mais marche si j'utilise une boucle FOR avec enormément d'itération (varier alpha n'a pas 
-changé grand chose.) Du coup toutes mes statistiques vont concerner la descente de gradient avec evaluation de la matrix 
-complète.
+J'ai implémenté la descente de gradient globale qui évalue donc tout le jeu de donné avant d'apprendre et 
+j'ai aussi implémenté la descente de gradient stochastique qui évalue une donné au hasard et apprend tout de suite après.
+Comme on peut l'observer sur les figures, la descente stochastique est bruité. 
+J'ai aussi fait varier le pas d'apprentissage alpha de la forme $\alpha = \frac{1}{i*100+t}$ en fonction de i et voici le résultat.
+\begin{figure}[!h]
+ \centering
+ \caption{Descente de gradient globale}
+ \includegraphics[width=10cm]{globale.png}
+\end{figure}
 
-J'ai donc fait varier le pas d'apprentissage alpha de la forme $\alpha = \frac{1}{i*100+t}$ et voilà ce que ça donne.
+\begin{figure}[!h]
+ \centering
+ \caption{Descente de gradient stochastique}
+ \includegraphics[width=10cm]{stochastique.png}
+\end{figure}
+
 \begin{figure}[!h]
  \centering
  \caption{Differents départs pour alpha}
@@ -64,9 +74,8 @@ J'ai donc fait varier le pas d'apprentissage alpha de la forme $\alpha = \frac{1
 \end{figure}
 
 \section{TP4 : Généralisation et sur apprentissage}
+Avec la méthode des moindres carré il est possible d'approximer des ensembles de points comme on peut l'observer si dessous,
+cependant en machine learning il existe le phénomène de sur apprentissage c est a dire qu'on perd toute notion de 
 
-
-\begin{abstract}
-\end{abstract}
 
 \end{document}          
