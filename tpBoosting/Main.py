@@ -60,7 +60,9 @@ def adaboost(X,Y,W,nbClassifier) :
         interm = []
         for i in range(N) :
             interm.append(Wt[i]*np.exp(-alpha*Y[i]*tab[i]))
-        Wt[i] = interm[i]/sum(interm)
+        somme = sum(interm)
+        for i in range(N) :
+            Wt[i] = interm[i]/somme
         HT.append((classifier,alpha))
     return HT
 
