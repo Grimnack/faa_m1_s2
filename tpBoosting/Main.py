@@ -65,24 +65,3 @@ def adaboost(X,Y,W,nbClassifier) :
             Wt[i] = interm[i]/somme
         HT.append((classifier,alpha))
     return HT
-
-
-
-
-
-
-
-
-# for prof in range(1,20) :
-#     classifier = tree.DecisionTreeClassifier(max_depth=prof)
-#     classifier = classifier.fit(diabeteX,diabeteY)
-#     nbError = 0
-#     for i in range(len(diabeteXtest)) :
-#         tab = classifier.predict(diabeteXtest[i])
-#         for x in tab :
-#             # print tab[0],diabeteYtest[i]
-#             if tab[0] != diabeteYtest[i] :
-#                 nbError = nbError + 1
-
-#     tauxErr = float(nbError)/float(len(diabeteYtest))
-#     print "pour une profondeur de ",prof," voici le taux d erreur ",tauxErr
