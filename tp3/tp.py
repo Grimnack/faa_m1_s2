@@ -41,6 +41,8 @@ x1 = np.zeros((2,N))
 x1[1,:] = temps
 x1[0,:] = z
 
+plotDescente = []
+
 ############# MESURE DE PERF #############
 
 def mesureVec(x,y,teta) :
@@ -69,61 +71,84 @@ def moindresCarres(matrix, vecteur):
     droite = np.dot(matrix,vecteur) 
     return  np.dot(np.linalg.inv(gauche),droite)
 
-def alpha(t) :
-    return 0.3/(1.+(40.*float(t)))
+# def alpha(t) :
+#     return 1./(1.+(4000.*float(t)))
+def alpha(t,i=4) :
+    return 1./(float(i)*100.+(1.*float(t)))
 
-def descenteGradient(x1,y,teta,t, epsilon=0.00000001,N=100) :
+
+def descenteGradient(x1,y,teta,t,i=4,epsilon=0.00000001,N=100) :
     tempsActuel = t
     tetaActuel = teta
+    convergence = []
     while(True) :
-        print tetaActuel
+        # print tetaActuel
+        jnorm2 = mesureNormal2(x1,y,tetaActuel)
+        convergence.append((tempsActuel,jnorm2))
         intermediaire = np.dot(x1,(y - np.dot(x1.T,tetaActuel))) #gradient
-        tetaPlusPlus = tetaActuel + np.dot(np.dot(alpha(t),intermediaire),1./float(N))
+        tetaPlusPlus = tetaActuel + np.dot(np.dot(alpha(tempsActuel,i=i),intermediaire),1./float(N))
         #test de convergence 
-        if math.fabs(mesureNormal2(x1,y,tetaPlusPlus)-mesureNormal2(x1,y,tetaActuel)) <= epsilon :
+        if math.fabs(mesureNormal2(x1,y,tetaPlusPlus)-jnorm2) <= epsilon :
+            plotDescente.append(convergence)
             return tetaActuel
         else :
             tetaActuel = tetaPlusPlus
             tempsActuel += 1
 
 def descenteGradientStochastique(matrix,y,teta,t,epsilon=0.00000001,N=100) :
-    '''
-    a corriger
-    '''
     tempsActuel = t
     tetaActuel = teta
+    convergence = []
     while(True) :
         i = r.randint(0,99)
-        print tetaActuel
+        # print tetaActuel
+        jnorm2 = mesureNormal2(matrix,y,tetaActuel)
+        convergence.append((tempsActuel,jnorm2))
         vecX = np.array([matrix[0][i],matrix[1][i]],float)
         intermediaire = np.dot(vecX,(y[i] - np.dot(tetaActuel.T,vecX))) #gradient
         tetaPlusPlus = tetaActuel + np.dot(alpha(tempsActuel),intermediaire)
         #test de convergence 
         if math.fabs(mesureNormal2(matrix,y,tetaPlusPlus)-mesureNormal2(matrix,y,tetaActuel)) <= epsilon :
+            plotDescente.append(convergence)
             return tetaActuel
         tetaActuel = tetaPlusPlus
         tempsActuel += 1
 
-def ordreIndice(N) :
-    return r.shuffle()
+def plotListCoupleI(liste,i) :
+    lesX = []
+    lesY = []
+    for (x,y) in liste :
+        lesX.append(x)
+        lesY.append(y)
+    plt.plot(lesX,lesY,label="J(teta) pour i = "+str(i))
+
+def plotListCouple(liste,chaine) :
+    lesX = []
+    lesY = []
+    for (x,y) in liste :
+        lesX.append(x)
+        lesY.append(y)
+    plt.plot(lesX,lesY,label=chaine)
 
 
-def descenteGradientStochastique2(matrix,y,teta,t,epsilon=0.000000001,N=100) :
-    '''
-    a corriger
-    '''
-    tempsActuel = t
-    tetaActuel = teta
-    for k in range(600000) :
-        i = r.randint(0,99)
-        print tetaActuel
-        vecX = np.array([matrix[0][i],matrix[1][i]],float)
-        intermediaire = np.dot(vecX,(y[i] - np.dot(tetaActuel.T,vecX))) #gradient
-        tetaPlusPlus = tetaActuel + np.dot(alpha(tempsActuel),intermediaire)
-        #test de convergence 
-        tetaActuel = tetaPlusPlus
-        tempsActuel += 1
-    return tetaActuel
+def compareDescenteI(x1,position,tetaDescente) :
+    for i in range(1,11) :
+        descenteGradient(x1,position,tetaDescente,1,i)
+        trace = plotDescente.pop()
+        plotListCouple(trace,i)
+    plt.legend()
+    plt.show()
+
+def compareDescente(x1,position,tetaDescente) :
+    # descenteGradient(x1,position,tetaDescente,1)
+    # trace = plotDescente.pop()
+    # plotListCouple(trace,"Descente Globale")
+    descenteGradientStochastique(x1,position,tetaDescente,1)
+    trace = plotDescente.pop()
+    plotListCouple(trace,"Descente Stochastique")
+    plt.legend()
+    plt.show()
+
 
 
 ################# SCRIPT #################
@@ -150,9 +175,10 @@ def descenteGradientStochastique2(matrix,y,teta,t,epsilon=0.000000001,N=100) :
 
 # print x1[1][99]
 
-tetaDescente = np.array([r.random(),r.random()],float)
+tetaDescente = np.array([3,2],float)
 # print "descenteGradient = ", descenteGradient(x1,position,tetaDescente,1)
-print "descenteGradientStochastique = ", descenteGradientStochastique(x1,position,tetaDescente,1)
+compareDescente(x1,position,tetaDescente)
+# print "descenteGradientStochastique = ", descenteGradientStochastique(x1,position,tetaDescente,1)
 
 # print ordreIndice(10)
 

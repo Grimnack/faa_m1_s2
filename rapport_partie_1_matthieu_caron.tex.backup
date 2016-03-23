@@ -51,8 +51,31 @@ $$diff(J_{l2}) =  0.0346087308024$$
 $$diff(J_{l\infty}) = 0.0424232506015$$
 
 \section{TP 3 : Descente de gradient }
+J'ai implémenté la descente de gradient globale qui évalue donc tout le jeu de donné avant d'apprendre et 
+j'ai aussi implémenté la descente de gradient stochastique qui évalue une donné au hasard et apprend tout de suite après.
+Comme on peut l'observer sur les figures, la descente stochastique est bruité. 
+J'ai aussi fait varier le pas d'apprentissage alpha de la forme $\alpha = \frac{1}{i*100+t}$ en fonction de i et voici le résultat.
+\begin{figure}[!h]
+ \centering
+ \caption{Descente de gradient globale}
+ \includegraphics[width=10cm]{globale.png}
+\end{figure}
 
-\begin{abstract}
-\end{abstract}
+\begin{figure}[!h]
+ \centering
+ \caption{Descente de gradient stochastique}
+ \includegraphics[width=10cm]{stochastique.png}
+\end{figure}
+
+\begin{figure}[!h]
+ \centering
+ \caption{Differents départs pour alpha}
+ \includegraphics[width=10cm]{tp3.png}
+\end{figure}
+
+\section{TP4 : Généralisation et sur apprentissage}
+Avec la méthode des moindres carré il est possible d'approximer des ensembles de points comme on peut l'observer si dessous,
+cependant en machine learning il existe le phénomène de sur apprentissage c est a dire qu'on perd toute notion de 
+
 
 \end{document}          
