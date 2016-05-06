@@ -9,8 +9,8 @@ import numpy as np
 
 
 ######################## GRAPHIQUE 1 ######################## 
-# X, Y = datasets.make_blobs(centers=2,n_samples=500,cluster_std=0.3,random_state=0)
-# clf = svm.SVC(C=1.0, kernel='linear',shrinking=False, probability=False,max_iter=500)
+X, Y = datasets.make_blobs(centers=2,n_samples=500,cluster_std=0.3,random_state=0)
+clf = svm.SVC(C=1.0, kernel='linear',shrinking=False, probability=False,max_iter=500)
 ######################## GRAPHIQUE 2 ########################
 # X, Y = datasets.make_blobs(centers=2,n_samples=500,cluster_std=0.3,random_state=0)
 # clf = svm.SVC(C=0.001, kernel='linear',shrinking=False, probability=False,max_iter=500)
