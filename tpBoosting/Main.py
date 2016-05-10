@@ -45,7 +45,7 @@ def adaboost(X,Y,W,nbClassifier) :
     HT = []
     for t in range(nbClassifier) :
         # Entrainer un classifier
-        classifier = tree.DecisionTreeClassifier(max_depth=prof)
+        classifier = tree.DecisionTreeClassifier(max_depth=1)
         classifier = classifier.fit(X,Y,sample_weight=Wt)
         # Calculer le taux d erreur
         tab = classifier.predict(X)
