@@ -51,16 +51,16 @@ def plot_confusion_matrix(cm, title='Confusion matrix', cmap=plt.cm.Blues):
 
 # print "###### RandomForestClassifier ######"
 
-for prof in range(1,10) :
-    RandomForestCL = RandomForestClassifier(n_estimators=10,max_depth=prof)
-    RandomForestCL = RandomForestCL.fit(diabeteX,diabeteY)
-    nbError = 0
-    tab = RandomForestCL.predict(diabeteXtest)
-    for i in range(len(diabeteXtest)) :
-        if tab[i] != diabeteYtest[i] :
-            nbError = nbError + 1
-        tauxErr = float(nbError)/float(len(diabeteYtest))
-    print "pour une profondeur de ",prof," voici le taux d erreur ",tauxErr
+# for prof in range(1,10) :
+#     RandomForestCL = RandomForestClassifier(n_estimators=10,max_depth=prof)
+#     RandomForestCL = RandomForestCL.fit(diabeteX,diabeteY)
+#     nbError = 0
+#     tab = RandomForestCL.predict(diabeteXtest)
+#     for i in range(len(diabeteXtest)) :
+#         if tab[i] != diabeteYtest[i] :
+#             nbError = nbError + 1
+#         tauxErr = float(nbError)/float(len(diabeteYtest))
+#     print "pour une profondeur de ",prof," voici le taux d erreur ",tauxErr
 
 # print "###### ExtraTreesClassifier ######"
 
@@ -149,7 +149,7 @@ for prof in range(1,10) :
 # plt.show()
 
 # print "####################################" 
-# print "######  DecisionTreeClassifier ######"
+# print "###### RandomForestClassifier ######"
 
 
 # confusion = [[0,0],[0,0]]
@@ -164,18 +164,18 @@ for prof in range(1,10) :
 
 # plt.show()
 
-print "####################################" 
-print "######  DecisionTreeClassifier ######"
+# print "####################################" 
+# print "###### ExtraTreesClassifier ######"
 
 
-confusion = [[0,0],[0,0]]
-ExtraTreeCL = ExtraTreesClassifier(n_estimators=10,max_depth=5)
-ExtraTreeCL = ExtraTreeCL.fit(diabeteX,diabeteY)
-tab = ExtraTreeCL.predict(diabeteXtest)
-for i in range(len(diabeteXtest)) :
-    confusion[int(tab[i])][int(diabeteYtest[i])] += 1
-print confusion
+# confusion = [[0,0],[0,0]]
+# ExtraTreeCL = ExtraTreesClassifier(n_estimators=10,max_depth=5)
+# ExtraTreeCL = ExtraTreeCL.fit(diabeteX,diabeteY)
+# tab = ExtraTreeCL.predict(diabeteXtest)
+# for i in range(len(diabeteXtest)) :
+#     confusion[int(tab[i])][int(diabeteYtest[i])] += 1
+# print confusion
 
-plot_confusion_matrix(confusion,title="ExtraTreesClassifier")
+# plot_confusion_matrix(confusion,title="ExtraTreesClassifier")
 
-plt.show()
+# plt.show()
